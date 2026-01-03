@@ -1,38 +1,15 @@
 import java.util.Scanner;
 import java.util.Stack;
 
-
-
-
 public class PreFix{
      Stack <Character> stack = new Stack<>();
 
      static Scanner sc = new Scanner(System.in);
      StringBuilder output = new StringBuilder();
      String input="";
-     
-     
-     void getString(){
-        System.out.println("Enter your infix expression :");
-        String temp = sc.nextLine();
-        for(int i=temp.length()-1;i>=0;i--){
-            char c = temp.charAt(i);
-            if(c=='(')
-            input+=')';
+     String prefix="";
 
-            else if(c==')')
-            input+='(';
-
-            else
-            input+=c;
-
-        }
-        
-
-     }
-
-
-    int typeBracket(char c){
+     int typeBracket(char c){
         if(c==('('))
         return 1;
 
@@ -43,7 +20,6 @@ public class PreFix{
         return 0;
 
     }
-
 
     boolean isSpace(char c){
         return c==' ';
@@ -67,6 +43,66 @@ public class PreFix{
     return 0;    
     }
 
+    String reverseExpression(String temp){
+        Stack <String> stk2 = new Stack<>();
+        StringBuilder current = new StringBuilder();
+        String ireturn="";
+
+        for(int i=0;i<temp.length();i++){            
+
+            char c = temp.charAt(i);
+     
+            if(isSpace(c))
+            continue;            
+
+            if(isOperator(c)){
+                if(current.length()>0)
+                stk2.push(current.toString());
+                current.setLength(0);
+                stk2.push(c+"");
+            }
+            else{
+                int a = typeBracket(c);
+               if(a==0){
+                current.append(c);
+               }
+               else{
+                if(current.length()>0)
+                stk2.push(current.toString());
+                current.setLength(0);
+
+                if(a==1)
+                stk2.push(")");
+
+                else
+                stk2.push("(");
+                
+               }
+            }          
+           
+
+        }
+        if(current.length()>0)
+        stk2.push(current.toString());
+
+        while(!stk2.isEmpty()){
+            ireturn+=stk2.pop() + " ";
+        }
+        return ireturn;
+    }
+
+     
+     
+     void getString(){
+        System.out.println("Enter your infix expression :");
+        String temp = sc.nextLine();
+        input = reverseExpression(temp);
+        
+        System.out.println("The reverse is "+input);        
+
+     }
+
+    
     void conversion(){
         for(int i=0;i<input.length();i++){
             
@@ -77,7 +113,6 @@ public class PreFix{
                while(!stack.isEmpty()&&precedence(stack.peek())>=precedence(c)&&c!='^'){
                 output.append(stack.peek());
                 stack.pop();
-
                }
                stack.push(c);
              
@@ -123,7 +158,7 @@ public class PreFix{
             output.append(stack.peek());
             stack.pop();
         }
-        output.reverse();
+        prefix = reverseExpression(output.toString());
 
        
         
@@ -134,7 +169,7 @@ public class PreFix{
         PreFix i2p = new PreFix();
         i2p.getString();
         i2p.conversion();
-        System.out.println("\n\nThe prefix conversion is :\n"+i2p.output);
+        System.out.println("\n\nThe prefix conversion is :\n"+i2p.prefix.trim());
 
        
 
