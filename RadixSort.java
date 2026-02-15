@@ -3,7 +3,7 @@
 import java.util.Scanner;
 class Queuee{
     int rear, front;
-    int [] arr = new int [50];
+    int [] arr = new int [150];
     Queuee(){
         rear = -1;
         front = -1;
@@ -171,3 +171,4 @@ public class RadixSort{
 
 
     
+
