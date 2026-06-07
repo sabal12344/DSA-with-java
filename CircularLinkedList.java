@@ -107,3 +107,7 @@ size++;
         cll.traverse();
     }
 }
+
+
+//9 bhako node----->11 bhako node----->10 bhako node----->38 bhako node----->48 bhako node----->53 bhako node----->33 bhako node----->59 bhako node----->10 bhako node----->57 bhako node----->26 bhako node----->39 bhako node----->65 bhako node----->125 bhako node----->
+//11 bhako node----->10 bhako node----->38 bhako node----->48 bhako node----->53 bhako node----->33 bhako node----->59 bhako node----->10 bhako node----->57 bhako node----->26 bhako node----->39 bhako node----->65 bhako node----->125 bhako node----->
