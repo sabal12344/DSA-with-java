@@ -2,7 +2,7 @@ import java.util.Random;
 
 class Node{
     int data;
-    CircularNode next;
+    Node next;
 
     Node(int data){
         this.data = data;
